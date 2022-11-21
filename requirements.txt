@@ -1,0 +1,12 @@
+sympy
+numpy
+gmpy2
+pysnptools
+cloudpickle
+opencv-python
+pydub
+ipython
+notebook
+matplotlib
+ipykernel
+moviepy

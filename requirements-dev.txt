@@ -1,0 +1,8 @@
+black
+flake8
+pytest
+isort
+pytest
+pytest-datadir
+# pytest-cov
+# pytest-doctestplus
