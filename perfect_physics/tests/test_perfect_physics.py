@@ -169,9 +169,9 @@ def test_billiards(tmp_path):
     logger.setLevel(logging.INFO)
 
     folder = tmp_path / "test_billiards/test_billiards"
-    World.billiards(folder, rows=2, rng=1)
-    World.run_to_file(folder, range(6))
-    World.render(folder, speed_up=24)
+    world = World.billiards(folder, rows=2, rng=1)
+    world.run_to_file(folder, 6)
+    World.render(folder, speed_up=10)
 
 
 def test_speed_again():
