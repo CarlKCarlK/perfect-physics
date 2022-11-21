@@ -10,3 +10,4 @@ notebook
 matplotlib
 ipykernel
 moviepy
+appdirs

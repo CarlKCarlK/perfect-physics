@@ -304,9 +304,7 @@ class World:
                 if jitter is None
                 else rng.randint(jitter[0], jitter[1] - 1) * jitter[2]
             )
-            b0 = Circle(
-                x=Rational(length * 3 / 4), y=hw, r=r0, vx=0, vy=0, m=1, id="b1"
-            )
+            b0 = Circle(x=Rational(length * 3 / 4), y=hw, r=r0, vx=0, vy=0, m=1, id="b1")
             world.circle_list.append(b0)
 
         if abs(rows) >= 2:
