@@ -21,10 +21,6 @@ from ._physics import Physics
 from ._timeline import Timeline, TimeNow, TimeReset, Reverse, billiards_audio
 from ._wall import Wall
 
-# cmk: do this: Be able to run span in reverse (with negative span steps)
-# cmk serialize worlds and compare and run for some amount of span
-# cmk should offer another save worlds in a more robust format than world_cp
-
 
 class World:
     def __init__(
@@ -46,7 +42,6 @@ class World:
             rng = random.Random(rng)
         self.rng = rng
 
-    # cmk rename or merge these
     def figure(self, font_scale=1, **kwargs):
         return plot(
             show=False,
@@ -289,7 +284,6 @@ class World:
                 else (rng.randint(jitter[0], jitter[1] - 1) * jitter[2])
             )
 
-            # cmk 0 do we keep moving all the balls to the left?
             b1 = Circle(
                 x=length - r1, y=y + r_factor * r1, r=r1, vx=-1, vy=0, m=1, id=id
             )  # 1 ball

@@ -54,8 +54,8 @@ class Physics:
         float_speed = complex_speed.real
         if float_speed < -eps:
             return False
-        # cmk bug: Does not handle the case where speed is still complex
-        # cmk bug: see 11/16/2022 8:52AM infinite_precision 5,10
+        # bug: Does not handle the case where speed is still complex
+        # bug: see 11/16/2022 8:52AM infinite_precision 5,10
         if float_speed > eps:
             return True
         return simplify(speed) > 0
@@ -281,9 +281,7 @@ class Physics:
             f"Looking at {len(pairs)} pairs out of {Physics._combo_count(circle_list, wall_list)} possible pairs"  # noqa E501
         )
 
-        ssca_list = map_reduce(
-            pairs, lambda pair: self._find_span(*pair), runner=runner
-        )
+        ssca_list = map_reduce(pairs, lambda pair: self._find_span(*pair), runner=runner)
         logging.debug("About to _fix_ssca")
         ssca_list = [
             Physics._fix_ssca(ssca, circle_list, wall_list) for ssca in ssca_list

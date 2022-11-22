@@ -109,7 +109,7 @@ def billiards_audio(file, timeline: List, speed_up):
                 assert isinstance(event.before[1], Circle)
                 audio = audio.overlay(ball_ball, position=(time * 1000 / speed_up))
         elif isinstance(event, Reverse):
-            audio = audio.overlay(reverse, position=(time * 1000 / speed_up))  # cmk
+            audio = audio.overlay(reverse, position=(time * 1000 / speed_up))
         elif isinstance(event, Move):
             pass
             # trimmed = rolling[: int(event.time * 1000 / speed_up)]

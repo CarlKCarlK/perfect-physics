@@ -108,8 +108,6 @@ def test_circle_wall_velocities():
     assert velocities == (sqrt(14) / 10, -7 * sqrt(14) / 10)
 
 
-# cmk article want to reduce physics to programming
-# cmk 'next' is a bad name for the value.
 def test_velocities():
     physics = Physics()
 
@@ -153,7 +151,6 @@ def test_plot(tmp_path):
     w1 = Wall(x0=20, y0=0, x1=20, y1=1)
     world = World([c1], [w1])
     figure = world.figure()
-    # cmk save to tmp
     figure.savefig(tmp_path / "del_me.png")
 
 
