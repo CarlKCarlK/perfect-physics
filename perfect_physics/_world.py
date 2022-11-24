@@ -596,7 +596,7 @@ class World:
                 else:
                     span_float = clock - clock_list[world_index - 1]
                     if span_float == 0:
-                        message = "PAUSE"
+                        message = "UPDATE vx's & vy's"
                     else:
                         span = simplify(
                             world_list[world_index].clock
@@ -626,7 +626,7 @@ class World:
             audio = AudioSegment.silent(duration * 1000)
             data_root = Path(__file__).absolute().parent.parent / "data"
             skip_sound = AudioSegment.from_file(data_root / "Electronic Button.mp3")
-            pause_sound = AudioSegment.from_file(data_root / "Flash Beep.mp3")
+            update_sound = AudioSegment.from_file(data_root / "Flash Beep.mp3")
             for world_index, _clock in enumerate(clock_list):
                 message_file = message_folder / f"{world_index:05d}.message_txt"
                 position = world_index * event_span * 1000
@@ -634,8 +634,8 @@ class World:
                     message = f.read()
                 if message == "":
                     pass
-                elif message == "PAUSE":
-                    audio = audio.overlay(pause_sound, position=position)
+                elif message.startswith("UPDATE"):
+                    audio = audio.overlay(update_sound, position=position)
                 else:
                     audio = audio.overlay(skip_sound, position=position)
             audio.export(wav_file, format="wav")
