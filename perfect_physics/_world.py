@@ -602,7 +602,7 @@ class World:
                             world_list[world_index].clock
                             - world_list[world_index - 1].clock
                         )
-                        message = f"SKIP {span}"
+                        message = f"MOVE TIME {span}"
                 figure.text(
                     0.5,
                     0.75,
