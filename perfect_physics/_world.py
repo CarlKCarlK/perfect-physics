@@ -567,8 +567,13 @@ class World:
         return clock_list, world_list, timeline
 
     def render_events(
-        folder, event_span=2, fps=24, font_scale=4, slice=np.s_[:], **kwargs
+        folder, seconds_per_event=2, fps=24, font_scale=4, slice=np.s_[:], **kwargs
     ):
+        frames_per_half_event = seconds_per_event * fps / 2
+        assert frames_per_half_event == int(
+            frames_per_half_event
+        ), "seconds_per_event * fps must be even"
+
         folder = Path(folder)
         render_folder = folder / "render_events"
         render_folder.mkdir(parents=True, exist_ok=True)
@@ -621,7 +626,7 @@ class World:
         misc_folder.mkdir(parents=True, exist_ok=True)
         wav_file = misc_folder / "soundtrack.wav"
 
-        duration = len(clock_list) * event_span
+        duration = len(clock_list) * seconds_per_event
         if not wav_file.exists():
             audio = AudioSegment.silent(duration * 1000)
             data_root = Path(__file__).absolute().parent.parent / "data"
@@ -629,7 +634,7 @@ class World:
             update_sound = AudioSegment.from_file(data_root / "Flash Beep.mp3")
             for world_index, _clock in enumerate(clock_list):
                 message_file = message_folder / f"{world_index:05d}.message_txt"
-                position = world_index * event_span * 1000
+                position = world_index * seconds_per_event * 1000
                 with open(message_file) as f:
                     message = f.read()
                 if message == "":
@@ -642,7 +647,7 @@ class World:
 
         # https://www.life2coding.com/convert-image-frames-video-file-using-opencv-python/
         silent_file = misc_folder / "silent_video.avi"
-        frames_per_half_event = event_span * fps / 2
+        frames_per_half_event = seconds_per_event * fps / 2
         assert frames_per_half_event == int(
             frames_per_half_event
         ), "event_span * fps must be even"
