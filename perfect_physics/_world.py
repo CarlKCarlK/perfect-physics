@@ -466,6 +466,8 @@ class World:
         audio=billiards_audio,
         slice=np.s_[:],
         round_time=True,
+        talkie_codec="png",
+        silent_codec="MJPG",
         runner=None,
         **kwargs,
     ):
@@ -521,7 +523,7 @@ class World:
                     height, width, _ = frame.shape
                     out = cv2.VideoWriter(
                         str(silent_file),
-                        cv2.VideoWriter_fourcc(*"MJPG"),
+                        cv2.VideoWriter_fourcc(*silent_codec),
                         fps,
                         (width, height),
                     )
@@ -530,7 +532,7 @@ class World:
 
         talkie_file = render_folder / f"{folder.name}.avi"
         if not talkie_file.exists():
-            World._combine_audio(silent_file, wav_file, talkie_file)
+            World._combine_audio(silent_file, wav_file, talkie_file, codec=talkie_codec)
 
     def _cp_to_lists(folder, slice=np.s_[:], filter_same_time=True):
         world_files = sorted(glob.glob(str(World._world_file(folder, None))))
@@ -567,7 +569,15 @@ class World:
         return clock_list, world_list, timeline
 
     def render_events(
-        folder, seconds_per_event=2, fps=24, font_scale=4, slice=np.s_[:], **kwargs
+        folder,
+        seconds_per_event=2,
+        fps=24,
+        font_scale=4,
+        slice=np.s_[:],
+        talkie_codec="png",
+        silent_codec="MJPG",
+        prefix="",
+        **kwargs,
     ):
         frames_per_half_event = seconds_per_event * fps / 2
         assert frames_per_half_event == int(
@@ -624,7 +634,7 @@ class World:
 
         misc_folder = render_folder / "misc"
         misc_folder.mkdir(parents=True, exist_ok=True)
-        wav_file = misc_folder / "soundtrack.wav"
+        wav_file = misc_folder / f"soundtrack{prefix}.wav"
 
         duration = len(clock_list) * seconds_per_event
         if not wav_file.exists():
@@ -646,7 +656,7 @@ class World:
             audio.export(wav_file, format="wav")
 
         # https://www.life2coding.com/convert-image-frames-video-file-using-opencv-python/
-        silent_file = misc_folder / "silent_video.avi"
+        silent_file = misc_folder / f"silent_video{prefix}.avi"
         frames_per_half_event = seconds_per_event * fps / 2
         assert frames_per_half_event == int(
             frames_per_half_event
@@ -664,7 +674,7 @@ class World:
                         height, width, _ = plain_frame.shape
                         out = cv2.VideoWriter(
                             str(silent_file),
-                            cv2.VideoWriter_fourcc(*"MJPG"),
+                            cv2.VideoWriter_fourcc(*silent_codec),
                             fps,
                             (width, height),
                         )
@@ -675,12 +685,12 @@ class World:
                     out.write(frame)
             out.release()
 
-        talkie_file = render_folder / f"{folder.name}.events.avi"
+        talkie_file = render_folder / f"{folder.name}{prefix}.events.avi"
         if not talkie_file.exists():
-            World._combine_audio(silent_file, wav_file, talkie_file)
+            World._combine_audio(silent_file, wav_file, talkie_file, codec=talkie_codec)
 
-    def _combine_audio(video_file, audio_file, out_file):
+    def _combine_audio(video_file, audio_file, out_file, codec="png"):
         video_clip = VideoFileClip(str(video_file))
         audio_clip = AudioFileClip(str(audio_file))
         final_clip = video_clip.set_audio(audio_clip)
-        final_clip.write_videofile(str(out_file), fps=video_clip.fps, codec="png")
+        final_clip.write_videofile(str(out_file), fps=video_clip.fps, codec=codec)
