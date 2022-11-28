@@ -468,6 +468,7 @@ class World:
         round_time=True,
         talkie_codec="png",
         silent_codec="MJPG",
+        prefix="",
         runner=None,
         **kwargs,
     ):
@@ -484,12 +485,12 @@ class World:
 
         misc_folder = render_folder / "misc"
         misc_folder.mkdir(parents=True, exist_ok=True)
-        wav_file = misc_folder / "soundtrack.wav"
+        wav_file = misc_folder / f"soundtrack{prefix}.wav"
 
         if audio and not wav_file.exists():
             audio(wav_file, timeline, speed_up=speed_up)
 
-        frame_folder = render_folder / "frames"
+        frame_folder = render_folder / f"frames{prefix}"
         frame_folder.mkdir(parents=True, exist_ok=True)
 
         def mapper(frame_index):
@@ -514,7 +515,7 @@ class World:
         frame_files = map_reduce(range(frame_count), mapper=mapper, runner=runner)
 
         # https://www.life2coding.com/convert-image-frames-video-file-using-opencv-python/
-        silent_file = misc_folder / "silent_video.avi"
+        silent_file = misc_folder / f"silent_video{prefix}.avi"
         if not silent_file.exists():
             out = None
             for frame_file in frame_files:
@@ -530,7 +531,7 @@ class World:
                 out.write(frame)
             out.release()
 
-        talkie_file = render_folder / f"{folder.name}.avi"
+        talkie_file = render_folder / f"{folder.name}{prefix}.avi"
         if not talkie_file.exists():
             World._combine_audio(silent_file, wav_file, talkie_file, codec=talkie_codec)
 
