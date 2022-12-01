@@ -1,7 +1,14 @@
 Perfect Physics
 ================
 
-See https://medium.com/@carlmkadie for articles.
+A free tutorial series in *Towards Data Science*:
+- Part 1: [High-level engine applied to tennis ball and basketball drop, etc.](https://towardsdatascience.com/perfect-infinite-precision-game-physics-in-python-part-2-360cc445a197) 
+- Part 2: [The program makes a philosophy discovery by simulating a billiards break.](https://towardsdatascience.com/perfect-infinite-precision-game-physics-in-python-part-2-360cc445a197)
+- Part 3: [Creating the low-level engine using SymPy, including setting up the physics equations (some are tricky) and getting SymPy to do the rest of the work.](https://medium.com/towards-data-science/perfect-infinite-precision-game-physics-in-python-part-3-9ea9043e3969)
+- Part 4, how to speed up the engine a bit (but not enough) and limitations (not yet published).
+
+
+See https://medium.com/@carlmkadie for other articles.
   
 See requirements.txt and requirements-dev.txt for dependencies.
 
