@@ -113,7 +113,7 @@ class World:
             logging.warning(
                 f"energy before {energy_before_float} != energy after {energy_after_float}"  # noqa E501
             )
-            raise Exception("energy not conserved")
+            # cmk raise Exception("energy not conserved")
         logging.info("tock finish")
 
     def _world_file_to_preview_file(world_file):
@@ -198,7 +198,7 @@ class World:
         return world, ss_calist, hint_ssca_list
 
     def inscribed(
-        circle_of_circle_radius, circle_count, circle_of_wall_radius, wall_count
+        circle_of_circle_radius, circle_count, circle_of_wall_radius, wall_count, r=1, reverse_direction=False,
     ):
         circle_list = []
         circle_vertex_list = []
@@ -213,9 +213,9 @@ class World:
                 Circle(
                     x,
                     y,
-                    r=1,
-                    vx=x / circle_of_circle_radius,
-                    vy=y / circle_of_circle_radius,
+                    r=r,
+                    vx=x / circle_of_circle_radius * (-1 if reverse_direction else 1),
+                    vy=y / circle_of_circle_radius * (-1 if reverse_direction else 1),
                     m=1,
                 )
             )
