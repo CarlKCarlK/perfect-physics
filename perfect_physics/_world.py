@@ -113,7 +113,7 @@ class World:
             logging.warning(
                 f"energy before {energy_before_float} != energy after {energy_after_float}"  # noqa E501
             )
-            # cmk raise Exception("energy not conserved")
+            raise Exception("energy not conserved")
         logging.info("tock finish")
 
     def _world_file_to_preview_file(world_file):
