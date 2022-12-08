@@ -16,7 +16,7 @@ class Physics:
     def __init__(self):
         data_root = Path(__file__).absolute().parent.parent / "data"
 
-        self._circle_circle_span = load(data_root / "cc_time_solutions.sympy")
+        self._circle_circle_acc_span = load(data_root / "cc_acc_time_solutions.sympy")
         self._circle_wall_span = load(data_root / "cw_time_solutions.sympy")
         self._circle_circle_bounce = load(data_root / "cc_velocity_solution.sympy")
         self._circle_wall_bounce = load(data_root / "cw_velocity_limits.sympy")
@@ -76,7 +76,7 @@ class Physics:
 
         return speed
 
-    def _circle_circle_spans(self, a: Circle, b: Circle):
+    def _circle_circle_spans(self, a: Circle, b: Circle, gravity=0):
 
         result_list = [
             time_solution.subs(
@@ -91,9 +91,10 @@ class Physics:
                     ("b_r", b.r),
                     ("b_vx", b.vx),
                     ("b_vy", b.vy),
+                    ("g", gravity),
                 ]
             )
-            for time_solution in self._circle_circle_span
+            for time_solution in self._circle_circle_acc_span
         ]
         return result_list
 
