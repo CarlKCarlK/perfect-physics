@@ -4,3 +4,4 @@ usr/*
 .ipynb_checkpoints/
 *TEMP_MPY_wvf_snd.mp3
 *.sympy
+.conda/*

@@ -4,5 +4,8 @@ pytest
 isort
 pytest
 pytest-datadir
+plotly
+ipywidgets
+
 # pytest-cov
 # pytest-doctestplus
