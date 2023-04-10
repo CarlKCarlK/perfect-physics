@@ -19,7 +19,7 @@ def save(expr, filename):
 
 
 def load(filename):
-    from sympy import (   # noqa: F401
+    from sympy import (  # noqa: F401
         Add,
         FiniteSet,
         Integer,
@@ -48,7 +48,6 @@ def plot(
     draw_wall_points=False,
     draw_radius=1.0,
 ):
-
     sns.set()
     figure = Figure(figsize=figsize)
     axes = figure.add_subplot()

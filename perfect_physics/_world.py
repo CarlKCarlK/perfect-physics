@@ -198,7 +198,12 @@ class World:
         return world, ss_calist, hint_ssca_list
 
     def inscribed(
-        circle_of_circle_radius, circle_count, circle_of_wall_radius, wall_count, r=1, reverse_direction=False,
+        circle_of_circle_radius,
+        circle_count,
+        circle_of_wall_radius,
+        wall_count,
+        r=1,
+        reverse_direction=False,
     ):
         circle_list = []
         circle_vertex_list = []
