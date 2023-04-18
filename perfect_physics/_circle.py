@@ -3,7 +3,7 @@ import copy
 import uuid
 from dataclasses import dataclass
 
-from sympy import simplify
+from sympy import simplify, sqrt
 
 
 @dataclass
@@ -64,3 +64,8 @@ class Circle:
 
     def clone(self):
         return copy.copy(self)
+
+    def distance(self, other):
+        if not isinstance(other, Circle):
+            raise TypeError("Argument 'other' must be an instance of Circle.")
+        return simplify(sqrt((self.x - other.x) ** 2 + (self.y - other.y) ** 2))
