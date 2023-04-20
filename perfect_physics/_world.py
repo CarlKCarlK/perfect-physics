@@ -42,7 +42,7 @@ class World:
             rng = random.Random(rng)
         self.rng = rng
 
-    def figure(self, font_scale=1, **kwargs):
+    def figure(self, font_scale=1, label_fun=None, **kwargs):
         return plot(
             show=False,
             circle_list=self.circle_list,
@@ -51,6 +51,7 @@ class World:
             font_scale=font_scale,
             xlim=self.xlim,
             ylim=self.ylim,
+            label_fun=label_fun,
             **kwargs,
         )
 

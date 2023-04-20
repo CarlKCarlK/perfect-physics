@@ -47,6 +47,7 @@ def plot(
     colors=["tab:blue"],
     draw_wall_points=False,
     draw_radius=1.0,
+    label_fun=None,
 ):
     sns.set()
     figure = Figure(figsize=figsize)
@@ -72,7 +73,7 @@ def plot(
             patches.Circle((circle.x, circle.y), circle.r * draw_radius, color=color)
         )
         axes.annotate(
-            "",
+            "" if label_fun is None else label_fun(circle),
             xy=(circle.x + circle.vx, circle.y + circle.vy),
             xytext=(circle.x, circle.y),
             arrowprops=dict(arrowstyle="->", color="darkblue"),
