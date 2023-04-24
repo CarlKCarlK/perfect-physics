@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <title>Ice Cream Picker</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+  </head>
+  <body>
+
+    <py-config>
+      packages = ["matplotlib", "pandas",
+      "seaborn", "cloudpickle",
+      "perfect-physics==0.1.3"]
+    </py-config>
+
+    <py-script>
+        import pandas as pd
+        from perfect_physics import Circle
+        from perfect_physics import Circle, plot
+
+        a = Circle(x=0, y=0, r=1, vx=2, vy=0)
+        b = Circle(x=5, y=0, r=1, vx=0, vy=0)
+        figure = plot(
+            [a, b],
+            colors=["tab:blue", "tab:red"],
+            xlim=[-2, 8],
+            ylim=[-2, 2],
+            font_scale=1,
+            )
+        display(figure, target="graph-area", append=False)
+    </py-script>
+
+
+    <div id="graph-area"></div>
+  </body>
+</html>

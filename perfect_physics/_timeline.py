@@ -4,8 +4,6 @@ from pathlib import Path
 from typing import Any, List
 
 import cloudpickle as pickle
-from pydub import AudioSegment
-
 from ._circle import Circle
 from ._wall import Wall
 
@@ -69,6 +67,7 @@ class MultipleCollisions:
 
 
 def billiards_audio(file, timeline: List, speed_up):
+    from pydub import AudioSegment
 
     file = Path(file)
     file.parent.mkdir(parents=True, exist_ok=True)

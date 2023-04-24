@@ -5,3 +5,6 @@ usr/*
 *TEMP_MPY_wvf_snd.mp3
 *.sympy
 .conda/*
+build/*
+dist/*
+perfect_physics.egg-info/*

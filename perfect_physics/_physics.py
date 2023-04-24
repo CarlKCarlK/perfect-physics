@@ -3,7 +3,15 @@ from pathlib import Path
 from typing import Any, List
 
 import numpy as np
-from pysnptools.util.mapreduce1 import map_reduce
+
+try:
+    from pysnptools.util.mapreduce1 import map_reduce
+except ImportError:
+
+    def map_reduce(input_seq, mapper, runner=None):
+        return [mapper(item) for item in input_seq]
+
+
 from sympy import S, im, oo, simplify
 
 from ._circle import Circle
@@ -77,7 +85,6 @@ class Physics:
         return speed
 
     def _circle_circle_spans(self, a: Circle, b: Circle):
-
         result_list = [
             time_solution.subs(
                 [
@@ -125,7 +132,6 @@ class Physics:
             raise TypeError("2nd object must be a circle or a wall")
 
     def _circle_circle_velocities(self, a: Circle, b: Circle):
-
         result_list = self._circle_circle_bounce.subs(
             [
                 ("a_x", a.x),
@@ -281,7 +287,9 @@ class Physics:
             f"Looking at {len(pairs)} pairs out of {Physics._combo_count(circle_list, wall_list)} possible pairs"  # noqa E501
         )
 
-        ssca_list = map_reduce(pairs, lambda pair: self._find_span(*pair), runner=runner)
+        ssca_list = map_reduce(
+            pairs, lambda pair: self._find_span(*pair), runner=runner
+        )
         logging.debug("About to _fix_ssca")
         ssca_list = [
             Physics._fix_ssca(ssca, circle_list, wall_list) for ssca in ssca_list

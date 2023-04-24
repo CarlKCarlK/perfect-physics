@@ -7,12 +7,16 @@ from pathlib import Path
 from typing import List
 
 import cloudpickle as pickle
-import cv2
 import numpy as np
-from moviepy.audio.io.AudioFileClip import AudioFileClip
-from moviepy.video.io.VideoFileClip import VideoFileClip
-from pydub import AudioSegment
-from pysnptools.util.mapreduce1 import map_reduce
+
+try:
+    from pysnptools.util.mapreduce1 import map_reduce
+except ImportError:
+
+    def map_reduce(input_seq, mapper, runner=None):
+        return [mapper(item) for item in input_seq]
+
+
 from sympy import Rational, S, simplify, pi, cos, sin
 
 from ._circle import Circle
@@ -304,7 +308,9 @@ class World:
                 if jitter is None
                 else rng.randint(jitter[0], jitter[1] - 1) * jitter[2]
             )
-            b0 = Circle(x=Rational(length * 3 / 4), y=hw, r=r0, vx=0, vy=0, m=1, id="b1")
+            b0 = Circle(
+                x=Rational(length * 3 / 4), y=hw, r=r0, vx=0, vy=0, m=1, id="b1"
+            )
             world.circle_list.append(b0)
 
         if abs(rows) >= 2:
@@ -478,6 +484,8 @@ class World:
         runner=None,
         **kwargs,
     ):
+        import cv2
+
         folder = Path(folder)
         clock_list, world_list, timeline = World._cp_to_lists(
             folder, slice=slice, filter_same_time=True
@@ -586,6 +594,9 @@ class World:
         prefix="",
         **kwargs,
     ):
+        from pydub import AudioSegment
+        import cv2
+
         frames_per_half_event = seconds_per_event * fps / 2
         assert frames_per_half_event == int(
             frames_per_half_event
@@ -697,6 +708,9 @@ class World:
             World._combine_audio(silent_file, wav_file, talkie_file, codec=talkie_codec)
 
     def _combine_audio(video_file, audio_file, out_file, codec="png"):
+        from moviepy.audio.io.AudioFileClip import AudioFileClip
+        from moviepy.video.io.VideoFileClip import VideoFileClip
+
         video_clip = VideoFileClip(str(video_file))
         audio_clip = AudioFileClip(str(audio_file))
         final_clip = video_clip.set_audio(audio_clip)
