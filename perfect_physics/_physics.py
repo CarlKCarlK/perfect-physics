@@ -22,7 +22,7 @@ from ._wall import Wall
 
 class Physics:
     def __init__(self):
-        data_root = Path(__file__).absolute().parent.parent / "data"
+        data_root = Path(__file__).absolute().parent / "data"
 
         self._circle_circle_span = load(data_root / "cc_time_solutions.sympy")
         self._circle_wall_span = load(data_root / "cw_time_solutions.sympy")

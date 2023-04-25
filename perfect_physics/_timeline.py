@@ -88,7 +88,7 @@ def billiards_audio(file, timeline: List, speed_up):
         elif isinstance(event, Move):
             duration = last_time_now + event.span
 
-    data_root = Path(__file__).absolute().parent.parent / "data"
+    data_root = Path(__file__).absolute().parent / "data"
     ball_ball = AudioSegment.from_file(data_root / "ball_ball.wav")
     stick_cue = AudioSegment.from_file(data_root / "stick_cue.wav")
     bumper = AudioSegment.from_file(data_root / "bumper.wav")

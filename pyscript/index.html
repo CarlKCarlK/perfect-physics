@@ -10,27 +10,36 @@
     <py-config>
       packages = ["matplotlib", "pandas",
       "seaborn", "cloudpickle",
-      "perfect-physics==0.1.3"]
+      "perfect-physics==0.1.9"]
     </py-config>
 
-    <py-script>
-        import pandas as pd
-        from perfect_physics import Circle
-        from perfect_physics import Circle, plot
+    <!-- <py-script>
+        import numpy as np
+        from perfect_physics import World, Circle, Wall
+        
+        circle_list = [Circle(x=1, y=0, r=1, vx=1, vy=0, m=1)]
+        for i in range(1, 6):
+            circle_list.append(Circle(x=i * 2 + 4, y=0, r=1, vx=0, vy=0, m=1))
+        wall_list = [Wall(x0=0, y0=0, x1=0, y1=1), Wall(x0=20, y0=0, x1=20, y1=1)]
+        world = World(circle_list, wall_list, xlim=(-1, 21), ylim=(-2, 2))
+        figure = world.run_in_place(7, show=True, show_fun=lambda figure: display(figure, target="graph-area", append=True))
+    </py-script> -->
 
-        a = Circle(x=0, y=0, r=1, vx=2, vy=0)
-        b = Circle(x=5, y=0, r=1, vx=0, vy=0)
-        figure = plot(
-            [a, b],
-            colors=["tab:blue", "tab:red"],
-            xlim=[-2, 8],
-            ylim=[-2, 2],
-            font_scale=1,
-            )
-        display(figure, target="graph-area", append=False)
-    </py-script>
+  
+    <py-repl output="replOutput">
+      import numpy as np
+      from perfect_physics import World, Circle, Wall
+      
+      circle_list = [Circle(x=1, y=0, r=1, vx=1, vy=0, m=1)]
+      for i in range(1, 6):
+          circle_list.append(Circle(x=i * 2 + 4, y=0, r=1, vx=0, vy=0, m=1))
+      wall_list = [Wall(x0=0, y0=0, x1=0, y1=1), Wall(x0=20, y0=0, x1=20, y1=1)]
+      world = World(circle_list, wall_list, xlim=(-1, 21), ylim=(-2, 2))
+      world.run_in_place(7, show=True, show_fun=lambda figure: display(figure, target="replOutput", append=True))
+  </py-repl>
 
 
-    <div id="graph-area"></div>
+
+    <div id="replOutput"></div>
   </body>
 </html>

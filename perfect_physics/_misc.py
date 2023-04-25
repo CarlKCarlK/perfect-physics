@@ -48,6 +48,7 @@ def plot(
     draw_wall_points=False,
     draw_radius=1.0,
     label_fun=None,
+    show_fun=None,
 ):
     sns.set()
     figure = Figure(figsize=figsize)
@@ -98,5 +99,8 @@ def plot(
         figure.set_canvas(new_manager.canvas)
         figure.set_dpi(100 * font_scale)
         figure.tight_layout()
-        figure.show()
+        if show_fun is None:
+            figure.show()
+        else:
+            show_fun(figure)
     return figure

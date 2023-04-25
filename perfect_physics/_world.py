@@ -46,7 +46,7 @@ class World:
             rng = random.Random(rng)
         self.rng = rng
 
-    def figure(self, font_scale=1, label_fun=None, **kwargs):
+    def figure(self, font_scale=1, label_fun=None, show_fun=None, **kwargs):
         return plot(
             show=False,
             circle_list=self.circle_list,
@@ -56,6 +56,7 @@ class World:
             xlim=self.xlim,
             ylim=self.ylim,
             label_fun=label_fun,
+            show_fun=show_fun,
             **kwargs,
         )
 
@@ -657,7 +658,7 @@ class World:
         duration = len(clock_list) * seconds_per_event
         if not wav_file.exists():
             audio = AudioSegment.silent(duration * 1000)
-            data_root = Path(__file__).absolute().parent.parent / "data"
+            data_root = Path(__file__).absolute().parent / "data"
             skip_sound = AudioSegment.from_file(data_root / "Electronic Button.mp3")
             update_sound = AudioSegment.from_file(data_root / "Flash Beep.mp3")
             for world_index, _clock in enumerate(clock_list):

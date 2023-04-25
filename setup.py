@@ -1,7 +1,7 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 # Version number
-version = "0.1.3"
+version = "0.1.9"
 
 
 def readme():
@@ -30,6 +30,7 @@ setup(
     # },
     url="https://towardsdatascience.com/perfect-infinite-precision-game-physics-in-python-part-1-698211c08d95",
     author="Carl Kadie",
-    packages=["perfect_physics"],  # basically, everything with a __init__.py
     install_requires=install_requires,
+    packages=find_packages(exclude=["tests"]),
+    include_package_data=True
 )
