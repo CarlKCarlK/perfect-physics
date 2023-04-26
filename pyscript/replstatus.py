@@ -1,7 +1,7 @@
 import asyncio
+from pyscript import Plugin
 
-
-class ReplStatus():
+class ReplStatus(Plugin):
     def init(self, *args):
         ...
 
