@@ -29,9 +29,11 @@
   }
         </script>      
     <py-script>
+      from sympy import latex
       from perfect_physics import World, Circle, Wall
-      def run_in_place(world, steps, target, fig_factor=1):
-        js.document.getElementById(target).innerHTML = ''
+      def run_in_place(world, steps, target, fig_factor=1, clear=True):
+        if clear:
+          js.document.getElementById(target).innerHTML = ''
         world.run_in_place(steps, show=True,
          show_fun=lambda figure: display(figure, target=target, append=True),
          figsize=(19.2 / 4, 10.8 / 4 * fig_factor)
@@ -43,6 +45,23 @@
                   "perfect-physics==0.1.9"]
       plugins = ['replstatus.py']
     </py-config>
+
+    <H1>Perfect Physics</H1>
+
+    <p><a href="https://github.com/CarlKCarlK/PerfectPhysics">Perfect Physics</a>
+       is a Python physics simulator that uses
+      computer algebra (<a href="https://www.sympy.org/">SymPy</a>)
+      to do all calculations exactly. Read <a href="https://towardsdatascience.com/perfect-infinite-precision-game-physics-in-python-part-1-698211c08d95">Perfect, Infinite-Precision, Game Physics in Python</a>
+      in <i>Towards Data Science</i> for details.
+    </p>
+
+      <p> This pages lets you run your own simulations in the browser.
+      (It uses <a href="https://pyscript.net/">PyScript</a>.) Just press a green
+      arrow.
+    </p>
+
+
+
 
     <H2>Newton's Cradle</H2>
 
@@ -62,9 +81,9 @@
     <div id="newtonOutput"></div>
 
 
-    <H2>Tennis Balls and Basketball</H2>
+    <H2>Tennis Ball and Basketball</H2>
 
-    <p>Ideas: Change the number of steps.</p>
+    <p>Ideas: Change the size of the basketball or the number of steps.</p>
 
     <py-repl output="tennisOutput">
       big_radius = 10
@@ -75,13 +94,43 @@
       wall_list = [Wall(x0=0, y0=0, x1=0, y1=1), Wall(x0=world_width, y0=0, x1=world_width, y1=1)]
       world = World(circle_list, wall_list, xlim=(-1, world_width + 1), ylim=(-big_radius - 1, big_radius + 1))
       run_in_place(world, steps=2, target="tennisOutput")
-      display(f"little vx is approx. {float(little.vx):.2f}", target="tennisOutput", append=True)
+      display(f"little vx is {little.vx} (approx. {float(little.vx):.2f})", target="tennisOutput", append=True)
     </py-repl>
     <button id="clearButton" onclick="clearOutput('tennisOutput')">clear</button>
 
     <div id="tennisOutput"></div>
 
+    <H2>Three Circles on a Line</H2>
 
+    <p>Ideas: Change the mass of the right ball.</p>
+
+    <py-repl output="onLineOutput">
+      js.document.getElementById("onLineOutput").innerHTML = ''
+      for seed in [0,1]:
+        left = Circle(x=-3, y=0, r=1, vx=1, vy=0, m=1, id="left")
+        middle = Circle(x=0, y=0, r=1, vx=0, vy=0, m=1, id="middle")
+        right = Circle(x=4, y=0, r=2, vx=-1, vy=0, m=4, id="right")
+        world = World([left, middle, right], rng=seed, xlim=(-10, 10), ylim=(-3, 3))
+        display(f"seed {seed}", target="onLineOutput", append=True)
+        run_in_place(world, steps=3, target="onLineOutput", fig_factor=.66, clear=False)
+    </py-repl>
+    <button id="clearButton" onclick="clearOutput('onLineOutput')">clear</button>
+
+    <div id="onLineOutput"></div>
+
+    <H2>Billiards</H2>
+
+    <p>Ideas: Change the # of rows or number of steps.</p>
+
+    <py-repl output="billiardsOutput">
+      rows = -2 # positive for a 1st ball of triangle
+      seed = 0
+      world = World.billiards(rows=rows, rng=seed)
+      run_in_place(world, steps=5, target="billiardsOutput")
+    </py-repl>
+    <button id="clearButton" onclick="clearOutput('billiardsOutput')">clear</button>
+
+    <div id="billiardsOutput"></div>
     </div>
   </body>
 </html>
