@@ -19,6 +19,13 @@
   <body>
 
     <py-script>
+        from perfect_physics import World, Circle, Wall
+        def run_in_place(world, steps):
+          js.document.getElementById("replOutput").innerHTML = ''
+          world.run_in_place(steps, show=True,
+           show_fun=lambda figure: display(figure, target="replOutput", append=True),
+           figsize=(19.2 / 4, 5.4 / 4)
+           )
     </py-script>
 
     <py-config>
@@ -28,14 +35,6 @@
     </py-config>
 
     <py-repl output="replOutput">
-      from perfect_physics import World, Circle, Wall
-      def run_in_place(world, steps):
-        js.document.getElementById("replOutput").innerHTML = ''
-        world.run_in_place(steps, show=True,
-         show_fun=lambda figure: display(figure, target="replOutput", append=True),
-         figsize=(19.2 / 4, 5.4 / 4)
-         )
-
       circle_list = [Circle(x=1, y=0, r=1, vx=1, vy=0, m=1)]
       for i in range(1, 5):
           circle_list.append(Circle(x=i * 2 + 4, y=0, r=1, vx=0, vy=0, m=1))
