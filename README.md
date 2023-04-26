@@ -1,7 +1,9 @@
 Perfect Physics
 ================
 
-A free tutorial series in *Towards Data Science*:
+Try the [Live demo](https://carlkcarlk.github.io/perfect-physics/pyscript/).
+
+Read the free tutorial series in *Towards Data Science*:
 
 - Part 1: [High-level engine applied to tennis ball and basketball drop, etc.](https://towardsdatascience.com/perfect-infinite-precision-game-physics-in-python-part-2-360cc445a197)
 - Part 2: [The program makes a philosophy discovery by simulating a billiards break.](https://towardsdatascience.com/perfect-infinite-precision-game-physics-in-python-part-2-360cc445a197)
