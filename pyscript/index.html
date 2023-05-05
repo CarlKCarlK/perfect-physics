@@ -7,27 +7,19 @@
     <meta charset="utf-8">
     <script defer src="https://pyscript.net/unstable/pyscript.js"></script>
     <link rel="stylesheet" href="https://pyscript.net/unstable/pyscript.css">
-    <style>
-      .py-repl-run-button {
-          opacity: 1 
-      }
-    </style>
-      <style>
-      .container {
-  max-width: 1000px; /* Adjust this value to set the desired maximum width */
-  margin: 0 auto;   /* Centers the container horizontally */
-  padding: 0 20px;  /* Adds some horizontal padding */
-}    </style>
-  </head>
-  <body>
-    <div class="container">
+    <link rel="stylesheet" href="styles.css">
+    
+</style>
 
-      <script>
-  function clearOutput(divId) {
-    const outputDiv = document.getElementById(divId);
-    outputDiv.innerHTML = '';
-  }
-        </script>      
+</head>
+<body>
+  <div class="container">
+
+    <script>
+function clearOutput(divId) {
+  const outputDiv = document.getElementById(divId);
+  outputDiv.innerHTML = '';
+}</script>      
     <py-script>
       from sympy import latex
       from perfect_physics import World, Circle, Wall
@@ -46,7 +38,18 @@
       plugins = ['replstatus.py']
     </py-config>
 
-    <H1>Perfect Physics</H1>
+    <div class="image-text-container">
+      <img src="CarlKadie.2011.500pxSquare.jpg" class="round-image" />
+      <div class="image-text">Carl M. Kadie</div>
+    </div>
+
+
+    <H1>Perfect Physics: Live Demo</H1>
+
+    <div class="responsive-image-container">
+      <img src="python newton.png" class="responsive-image" />
+    </div>
+
 
     <p><a href="https://github.com/CarlKCarlK/PerfectPhysics">Perfect Physics</a>
        is <b>a Python physics simulator that uses
@@ -67,6 +70,7 @@
       <p>The page uses <a href="https://pyscript.net/">PyScript</a>.
         Its <a href="https://github.com/CarlKCarlK/perfect-physics/blob/main/pyscript/index.html">source code</a> is simple.</p>
 
+        <hr></hr>
 
     <H2>Newton's Cradle</H2>
 
@@ -85,7 +89,7 @@
 
     <div id="newtonOutput"></div>
 
-
+    <hr></hr>
     <H2>Tennis Ball and Basketball</H2>
 
     <p>It prints the velocity of the tennis ball at the end.</p>
@@ -106,6 +110,7 @@
 
     <div id="tennisOutput"></div>
 
+    <hr></hr>
     <H2>Three Circles on a Line</H2>
 
     <p>It runs with two different seeds.
@@ -128,6 +133,7 @@
 
     <div id="onLineOutput"></div>
 
+    <hr></hr>
     <H2>Billiards</H2>
 
     <p>Ideas: Change the # of rows or number of steps.</p>

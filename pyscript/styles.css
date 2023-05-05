@@ -1,0 +1,55 @@
+.round-image {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
+  
+  .image-text-container {
+    display: inline-block; /* Use inline-block to keep the container size relative to its content */
+    position: relative; /* Set the container to be the reference point for absolute positioning */
+  }
+  
+  .image-text {
+    position: absolute; /* Position the text absolutely within the container */
+    left: 60px; /* Position the text to the right of the image, adjust the value as needed */
+    top: 10px; /* Position the text 25px from the top of the image, adjust the value as needed */
+    width: 100px;
+    font-family: 'Arial', sans-serif; /* Example: change the font */
+  font-weight: lighter; /* Example: make the text bold */
+  font-size: 1.1em; /* Example: increase the font size */
+  color: #333; /* Example: change the text color */
+  }
+  .py-repl-run-button {
+    opacity: 1 
+}
+
+.container {
+    max-width: 1000px; /* Adjust this value to set the desired maximum width */
+    margin: 0 auto;   /* Centers the container horizontally */
+    padding: 0 20px;  /* Adds some horizontal padding */
+    background-color: white;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+      font-size: var(--body-font-size, 14px);
+  }   
+    a {
+      color: var(#0969da;);
+      text-decoration: none;
+  }
+  
+  body {
+    background-color: grey; /* Set the background color of the body to grey */
+    margin: 0;
+    padding: 0;
+  }
+
+  .responsive-image-container {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto; /* Center the container horizontally */
+  }
+  
+  .responsive-image {
+    width: 100%; /* Set the image width to 100% of the container */
+    height: auto; /* Set the image height to auto, maintaining its aspect ratio */
+  }
