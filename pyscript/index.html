@@ -1,42 +1,41 @@
 <html>
 
+<head>
+  <title>Perfect Physics: Live Demo</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <meta property="og:image" content="python newton.png" />
 
-
-  <head>
-    <title>Perfect Physics: Live Demo</title>
-    <meta charset="utf-8">
-    <script defer src="https://pyscript.net/unstable/pyscript.js"></script>
-    <link rel="stylesheet" href="https://pyscript.net/unstable/pyscript.css">
-    <link rel="stylesheet" href="styles.css">
-    <meta property="og:image" content="python newton.png" />
-    
-</style>
+  </style>
 
 </head>
+
 <body>
   <div class="container">
 
     <script>
-function clearOutput(divId) {
-  const outputDiv = document.getElementById(divId);
-  outputDiv.innerHTML = '';
-}</script>      
+      function clearOutput(divId) {
+        const outputDiv = document.getElementById(divId);
+        outputDiv.innerHTML = '';
+      }
+    </script>
     <py-script>
       from sympy import latex
       from perfect_physics import World, Circle, Wall
       def run_in_place(world, steps, target, fig_factor=1, clear=True):
-        if clear:
-          js.document.getElementById(target).innerHTML = ''
-        world.run_in_place(steps, show=True,
+         if clear:
+           js.document.getElementById(target).innerHTML = ''
+         world.run_in_place(steps, show=True,
          show_fun=lambda figure: display(figure, target=target, append=True),
          figsize=(19.2 / 4, 10.8 / 4 * fig_factor)
-         )
+      )
     </py-script>
 
     <py-config>
       packages = ["matplotlib", "pandas", "seaborn", "cloudpickle",
                   "perfect-physics==0.1.9"]
-      plugins = ['replstatus.py']
     </py-config>
 
     <div class="image-text-container">
@@ -53,26 +52,31 @@ function clearOutput(divId) {
 
 
     <p><a href="https://github.com/CarlKCarlK/perfect-physics">Perfect Physics</a>
-       is <b>a Python physics simulator that uses
-      computer algebra</b> (<a href="https://www.sympy.org/">SymPy</a>)
-      to do all calculations exactly. Read 
-      "<a href="https://towardsdatascience.com/perfect-infinite-precision-game-physics-in-python-part-1-698211c08d95">Perfect, Infinite-Precision, Game Physics in Python"</a>
-      in <i>Towards Data Science</i> for details.
+      is <b>a Python physics simulator that uses
+        computer algebra</b> (<a href="https://www.sympy.org/">SymPy</a>)
+      to do all calculations exactly. For details, read
+      "<a
+        href="https://towardsdatascience.com/perfect-infinite-precision-game-physics-in-python-part-1-698211c08d95">Perfect,
+        Infinite-Precision, Game Physics in Python"</a>
+      in <i>Towards Data Science</i> or watch the
+      <a href="https://www.youtube.com/watch?v=52n2qKgwW_Q&t=4s">PyData Conference Presentation</a> .
     </p>
 
-      <p> This page lets you run your own simulations in the browser.
+    <p> This page lets you run your own simulations in the browser.
       <b>Just press a green
-      arrow.</b> If you like, you can change the examples completely and run
+        arrow (and wait a while).</b> If you like, you can change the examples completely and run
       arbitrary Python code.
     </p>
 
-    <p>The <b>outputs shows snapshots</b> at the next collision(s) with a "Clock". 
+    <p>The <b>outputs shows snapshots</b> at the next collision(s) with a "Clock".
       (Full animations are not yet available.)</p>
 
-      <p>The page uses <a href="https://pyscript.net/">PyScript</a>.
-        Its <a href="https://github.com/CarlKCarlK/perfect-physics/blob/main/pyscript/index.html">source code</a> is simple.</p>
+    <p>The page uses <a href="https://pyscript.net/">PyScript</a>.
+      Its <a href="https://github.com/CarlKCarlK/perfect-physics/blob/main/pyscript/index.html">source code</a> is
+      simple.</p>
 
-        <hr></hr>
+    <hr>
+    </hr>
 
     <H2>Newton's Cradle</H2>
 
@@ -82,7 +86,7 @@ function clearOutput(divId) {
     <py-repl output="newtonOutput">
       circle_list = [Circle(x=1, y=0, r=1, vx=1, vy=0, m=1)]
       for i in range(1, 5):
-          circle_list.append(Circle(x=i * 2 + 4, y=0, r=1, vx=0, vy=0, m=1))
+         circle_list.append(Circle(x=i * 2 + 4, y=0, r=1, vx=0, vy=0, m=1))
       wall_list = [Wall(x0=0, y0=0, x1=0, y1=1), Wall(x0=20, y0=0, x1=20, y1=1)]
       world = World(circle_list, wall_list, xlim=(-1, 21), ylim=(-2, 2))
       run_in_place(world, steps=5, target="newtonOutput", fig_factor=0.5)
@@ -91,7 +95,8 @@ function clearOutput(divId) {
 
     <div id="newtonOutput"></div>
 
-    <hr></hr>
+    <hr>
+    </hr>
     <H2>Tennis Ball and Basketball</H2>
 
     <p>It prints the velocity of the tennis ball at the end.</p>
@@ -112,13 +117,14 @@ function clearOutput(divId) {
 
     <div id="tennisOutput"></div>
 
-    <hr></hr>
+    <hr>
+    </hr>
     <H2>Three Circles on a Line</H2>
 
     <p>It runs with two different seeds.
-       This is based on an example from Prof. Edward A. Lee's 
-       <a href="https://dl.acm.org/doi/pdf/10.1145/2912149">Fundamental Limits of Cyber-Physical Systems Modeling</a>.
-        </p>
+      This is based on an example from Prof. Edward A. Lee's
+      <a href="https://dl.acm.org/doi/pdf/10.1145/2912149">Fundamental Limits of Cyber-Physical Systems Modeling</a>.
+    </p>
     <p>Ideas: Change the mass of the right ball.</p>
 
     <py-repl output="onLineOutput">
@@ -135,7 +141,8 @@ function clearOutput(divId) {
 
     <div id="onLineOutput"></div>
 
-    <hr></hr>
+    <hr>
+    </hr>
     <H2>Billiards</H2>
 
     <p>Ideas: Change the # of rows or number of steps.</p>
@@ -149,6 +156,7 @@ function clearOutput(divId) {
     <button id="clearButton" onclick="clearOutput('billiardsOutput')">clear</button>
 
     <div id="billiardsOutput"></div>
-    </div>
-  </body>
+  </div>
+</body>
+
 </html>
